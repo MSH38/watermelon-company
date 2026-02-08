@@ -1,0 +1,117 @@
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import watermelonLogo from "@/assets/watermelon-logo.png";
+
+const navLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Industries", href: "#industries" },
+  { label: "Case Studies", href: "#case-studies" },
+  { label: "Process", href: "#process" },
+  { label: "Contact", href: "#contact" },
+];
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-background/90 backdrop-blur-xl border-b border-border/50"
+          : "bg-transparent"
+      }`}
+    >
+      <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-4">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-3 group">
+          <img
+            src={watermelonLogo}
+            alt="Watermelon Company Logo"
+            className="w-10 h-10 object-contain transition-transform duration-300 group-hover:rotate-12"
+          />
+          <div className="flex flex-col">
+            <span className="font-display text-lg font-semibold tracking-wide text-foreground">
+              WATERMELON
+            </span>
+            <span className="text-[10px] tracking-[0.3em] text-primary font-body uppercase">
+              Company
+            </span>
+          </div>
+        </a>
+
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="hidden lg:block">
+          <Button variant="hero" size="default" asChild>
+            <a href="#contact">Get a Quote</a>
+          </Button>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="lg:hidden text-foreground p-2"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+          >
+            <div className="flex flex-col px-6 py-6 gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className="text-sm font-body text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-wider"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Button variant="hero" size="lg" className="mt-4" asChild>
+                <a href="#contact">Get a Quote</a>
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+};
+
+export default Navbar;
