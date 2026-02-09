@@ -1,12 +1,35 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const stats = [
-  { number: "18+", label: "Years Experience" },
-  { number: "1000+", label: "Events Delivered" },
-  { number: "100+", label: "Global Clients" },
+  { number: 18, suffix: "+", label: "Years Experience" },
+  { number: 1000, suffix: "+", label: "Events Delivered" },
+  { number: 100, suffix: "+", label: "Global Clients" },
 ];
+
+const CountUp = ({ target, suffix, isInView }: { target: number; suffix: string; isInView: boolean }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let start = 0;
+    const duration = 2000;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [isInView, target]);
+
+  return <>{count}{suffix}</>;
+};
 
 const SocialProof = () => {
   const ref = useRef(null);
@@ -28,7 +51,7 @@ const SocialProof = () => {
               className="text-center px-8"
             >
               <span className="font-display text-5xl md:text-6xl font-bold text-gradient-gold">
-                {stat.number}
+                <CountUp target={stat.number} suffix={stat.suffix} isInView={isInView} />
               </span>
               <p className="font-body text-muted-foreground text-sm tracking-widest uppercase mt-3">
                 {stat.label}

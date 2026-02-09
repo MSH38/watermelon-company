@@ -1,0 +1,5 @@
+# /var/www/html/Portfolio/netlify.toml
+[build]
+  functions = "netlify/functions"
+  command = "npm run build"
+  publish = "dist"
