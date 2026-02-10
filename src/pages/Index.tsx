@@ -7,6 +7,7 @@ import Industries from "@/components/Industries";
 import CaseStudies from "@/components/CaseStudies";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import Testimonials from "@/components/Testimonials";
+import TeamSlider from "@/components/TeamSlider";
 import LeadCapture from "@/components/LeadCapture";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ const Index = () => {
         <ServicesGrid />
         <Industries />
         <CaseStudies />
+        <TeamSlider />
         <ProcessTimeline />
         <Testimonials />
         <LeadCapture />

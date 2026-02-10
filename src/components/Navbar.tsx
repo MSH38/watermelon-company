@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
 import watermelonLogo from "@/assets/watermelon-logo.png";
 
 const navLinks = [
@@ -17,12 +18,23 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!isHome) {
+      e.preventDefault();
+      navigate("/" + href);
+    }
+    setIsMobileOpen(false);
+  };
 
   return (
     <motion.header
@@ -36,29 +48,20 @@ const Navbar = () => {
       }`}
     >
       <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-4">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 group">
-          <img
-            src={watermelonLogo}
-            alt="Watermelon Company Logo"
-            className="w-10 h-10 object-contain transition-transform duration-300 group-hover:rotate-12"
-          />
+        <a href={isHome ? "#home" : "/"} onClick={(e) => handleNavClick(e, "#home")} className="flex items-center gap-3 group">
+          <img src={watermelonLogo} alt="Watermelon Company Logo" className="w-10 h-10 object-contain transition-transform duration-300 group-hover:rotate-12" />
           <div className="flex flex-col">
-            <span className="font-display text-lg font-semibold tracking-wide text-foreground">
-              WATERMELON
-            </span>
-            <span className="text-[10px] tracking-[0.3em] text-primary font-body uppercase">
-              Company
-            </span>
+            <span className="font-display text-lg font-semibold tracking-wide text-foreground">WATERMELON</span>
+            <span className="text-[10px] tracking-[0.3em] text-primary font-body uppercase">Company</span>
           </div>
         </a>
 
-        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={isHome ? link.href : `/${link.href}`}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
             >
               {link.label}
@@ -66,24 +69,17 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="hidden lg:block">
           <Button variant="hero" size="default" asChild>
-            <a href="#contact">Get a Quote</a>
+            <a href={isHome ? "#contact" : "/#contact"} onClick={(e) => handleNavClick(e, "#contact")}>Get a Quote</a>
           </Button>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="lg:hidden text-foreground p-2"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label="Toggle menu"
-        >
+        <button className="lg:hidden text-foreground p-2" onClick={() => setIsMobileOpen(!isMobileOpen)} aria-label="Toggle menu">
           {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -96,15 +92,15 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
+                  href={isHome ? link.href : `/${link.href}`}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-sm font-body text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-wider"
                 >
                   {link.label}
                 </a>
               ))}
               <Button variant="hero" size="lg" className="mt-4" asChild>
-                <a href="#contact">Get a Quote</a>
+                <a href={isHome ? "#contact" : "/#contact"} onClick={(e) => handleNavClick(e, "#contact")}>Get a Quote</a>
               </Button>
             </div>
           </motion.div>

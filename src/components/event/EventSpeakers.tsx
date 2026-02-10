@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import { Linkedin, Twitter } from "lucide-react";
 import type { Speaker } from "@/data/events";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) => (
   <motion.div
@@ -31,28 +38,31 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
   </motion.div>
 );
 
+const SpeakerSlider = ({ title, subtitle, speakers }: { title: string; subtitle: string; speakers: Speaker[] }) => (
+  <div className="mb-16 last:mb-0">
+    <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">{subtitle}</p>
+    <h2 className="font-display text-3xl md:text-4xl font-bold mb-10">{title}</h2>
+    <Carousel opts={{ align: "start", loop: true }} className="w-full">
+      <CarouselContent className="-ml-4">
+        {speakers.map((s, i) => (
+          <CarouselItem key={s.name + i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+            <SpeakerCard speaker={s} index={i} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="hidden md:flex -left-5" />
+      <CarouselNext className="hidden md:flex -right-5" />
+    </Carousel>
+  </div>
+);
+
 const EventSpeakers = ({ speakers, chairpersons }: { speakers: Speaker[]; chairpersons: Speaker[] }) => (
   <section className="section-padding bg-card/50">
     <div className="max-w-6xl mx-auto">
       {chairpersons.length > 0 && (
-        <div className="mb-16">
-          <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">Leadership</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-10">Chairpersons</h2>
-          <div className="flex flex-wrap justify-center gap-12">
-            {chairpersons.map((c, i) => (
-              <SpeakerCard key={c.name} speaker={c} index={i} />
-            ))}
-          </div>
-        </div>
+        <SpeakerSlider title="Chairpersons" subtitle="Leadership" speakers={chairpersons} />
       )}
-
-      <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">Featured</p>
-      <h2 className="font-display text-3xl md:text-4xl font-bold mb-10">Speakers</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-        {speakers.map((s, i) => (
-          <SpeakerCard key={s.name} speaker={s} index={i} />
-        ))}
-      </div>
+      <SpeakerSlider title="Speakers" subtitle="Featured" speakers={speakers} />
     </div>
   </section>
 );
