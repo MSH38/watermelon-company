@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import SocialProof from "@/components/SocialProof";
 import About from "@/components/About";
 import ServicesGrid from "@/components/ServicesGrid";
-import Industries from "@/components/Industries";
+// import Industries from "@/components/Industries";
 import CaseStudies from "@/components/CaseStudies";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import Testimonials from "@/components/Testimonials";
@@ -19,8 +19,10 @@ const Index = () => {
         <Hero />
         <SocialProof />
         <About />
+        <hr></hr>
         <ServicesGrid />
-        <Industries />
+        <hr></hr>
+        {/* <Industries /> */}
         <CaseStudies />
         <TeamSlider />
         <ProcessTimeline />
