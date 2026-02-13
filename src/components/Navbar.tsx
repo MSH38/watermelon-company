@@ -18,15 +18,30 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+
+      if (!isHome) return;
+      const sections = document.querySelectorAll("section[id]");
+      let current = "#home";
+      sections.forEach((section) => {
+        const top = (section as HTMLElement).offsetTop - 200;
+        if (window.scrollY >= top) {
+          current = `#${section.getAttribute("id")}`;
+        }
+      });
+      setActiveSection(current);
+    };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!isHome) {
@@ -49,7 +64,7 @@ const Navbar = () => {
     >
       <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-4">
         <a href={isHome ? "#home" : "/"} onClick={(e) => handleNavClick(e, "#home")} className="flex items-center gap-3 group">
-          <img src={watermelonLogo} alt="Watermelon Company Logo" className="w-10 h-10 object-contain transition-transform duration-300 group-hover:rotate-12" />
+          <img src={watermelonLogo} alt="Watermelon Company Logo" className="w-10 h-10 object-contain transition-transform duration-300 group-hover:rotate-12 brightness-150" />
           <div className="flex flex-col">
             <span className="font-display text-lg font-semibold tracking-wide text-foreground">WATERMELON</span>
             <span className="text-[10px] tracking-[0.3em] text-primary font-body uppercase">Company</span>
@@ -62,7 +77,11 @@ const Navbar = () => {
               key={link.label}
               href={isHome ? link.href : `/${link.href}`}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
+              className={`text-sm font-body transition-colors duration-300 tracking-wide uppercase ${
+                isHome && activeSection === link.href
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
             >
               {link.label}
             </a>

@@ -9,6 +9,8 @@ const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
     loop: true,
     align: "center",
     slidesToScroll: 1,
+    watchFocus: false,
+    duration: 40,
   });
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -18,13 +20,12 @@ const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
     setCentralIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
-  // Auto-scroll with slow speed
   useEffect(() => {
     if (!emblaApi) return;
     const start = () => {
       autoplayRef.current = setInterval(() => {
         if (!isHovered) emblaApi.scrollNext();
-      }, 2500);
+      }, 3000);
     };
     start();
     return () => {
@@ -64,25 +65,25 @@ const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
                 return (
                   <div
                     key={sponsor.name + i}
-                    className="min-w-0 shrink-0 grow-0 basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500"
+                    className="min-w-0 shrink-0 grow-0 basis-1/3 md:basis-1/5 pl-4 transition-all duration-700"
                   >
                     <a href={sponsor.url} target="_blank" rel="noreferrer" className="block">
                       <div className="relative aspect-[16/9] rounded-lg overflow-hidden border border-border/50 group">
                         <img
                           src={sponsor.image}
                           alt={sponsor.name}
-                          className={`w-full h-full object-cover transition-all duration-700 ${
-                            isCenter ? "" : "grayscale opacity-60"
+                          className={`w-full h-full object-contain bg-white p-2 transition-all duration-700 ${
+                            isCenter ? "" : "grayscale opacity-50"
                           }`}
                         />
                         <div
-                          className={`absolute inset-0 transition-opacity duration-300 flex items-center justify-center ${
+                          className={`absolute inset-0 transition-opacity duration-500 flex items-end justify-center pb-2 ${
                             isCenter
-                              ? "bg-primary/20 opacity-100"
-                              : "bg-background/70 opacity-0 group-hover:opacity-100"
+                              ? "bg-primary/10 opacity-100"
+                              : "bg-background/60 opacity-0 group-hover:opacity-100"
                           }`}
                         >
-                          <span className="font-display text-sm font-semibold text-foreground drop-shadow-md">
+                          <span className="font-display text-xs font-semibold text-foreground drop-shadow-md bg-background/70 px-2 py-1 rounded">
                             {sponsor.name}
                           </span>
                         </div>

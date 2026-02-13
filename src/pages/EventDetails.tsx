@@ -17,7 +17,11 @@ const EventDetails = () => {
   const event = events.find((e) => e.id === id);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Use setTimeout to ensure scroll happens after all components render
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   if (!event) return <Navigate to="/" replace />;
