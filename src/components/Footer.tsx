@@ -12,9 +12,9 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#", icon: Linkedin },
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "Twitter", href: "#", icon: Twitter },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/mahmoud-heikal/", icon: Linkedin },
+  { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
+  { label: "Twitter", href: "https://x.com/", icon: Twitter },
 ];
 
 const Footer = () => {
