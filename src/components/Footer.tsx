@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* Bottom */}
           <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-body text-xs text-muted-foreground">© 2024 Watermelon Company. All rights reserved.</p>
+            <p className="font-body text-xs text-muted-foreground">© 2026 Watermelon Company. All rights reserved.</p>
             <div className="flex gap-6">
               <a href="#" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
               <a href="#" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
