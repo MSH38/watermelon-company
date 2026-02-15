@@ -95,9 +95,10 @@ const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
                     <img
                       src={sponsor.image}
                       alt={sponsor.name}
-                      className={`w-full h-full object-contain p-3 transition-all duration-500 ${
-                        isColored ? "grayscale-0 opacity-100" : "grayscale opacity-40"
-                      }`}
+                      // className={`w-full h-full object-contain p-3 transition-all duration-500 ${
+                      //   isColored ? "grayscale-0 opacity-100" : "grayscale opacity-40"
+                      // }`}
+                      className="w-full h-full object-contain p-3 transition-all duration-500 grayscale-0 opacity-100"
                       loading="lazy"
                     />
                     <div
