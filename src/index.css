@@ -121,6 +121,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Infinite marquee animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
