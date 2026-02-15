@@ -8,6 +8,7 @@ import CaseStudies from "@/components/CaseStudies";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import Testimonials from "@/components/Testimonials";
 import TeamSlider from "@/components/TeamSlider";
+import SponsorsPartners from "@/components/SponsorsPartners";
 import LeadCapture from "@/components/LeadCapture";
 import Footer from "@/components/Footer";
 
@@ -19,14 +20,13 @@ const Index = () => {
         <Hero />
         <SocialProof />
         <About />
-        <hr></hr>
         <ServicesGrid />
-        <hr></hr>
         {/* <Industries /> */}
         <CaseStudies />
         <TeamSlider />
         <ProcessTimeline />
         <Testimonials />
+        <SponsorsPartners />
         <LeadCapture />
       </main>
       <Footer />
