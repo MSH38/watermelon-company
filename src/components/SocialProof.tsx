@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useInView, useSpring, useTransform, MotionValue } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 const stats = [
   { number: 18, suffix: "+", label: "Years Experience" },
@@ -8,27 +7,32 @@ const stats = [
   { number: 100, suffix: "+", label: "Global Clients" },
 ];
 
-const CountUp = ({ target, suffix, isInView }: { target: number; suffix: string; isInView: boolean }) => {
-  const [count, setCount] = useState(0);
+const AnimatedNumber = ({ value, isInView }: { value: number; isInView: boolean }) => {
+  const spring = useSpring(0, { 
+    mass: 1, 
+    stiffness: 40, 
+    damping: 20,
+    restDelta: 0.5,
+  });
+  const display = useTransform(spring, (v: number) => Math.round(v));
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!isInView) return;
-    let start = 0;
-    const duration = 2000;
-    const step = Math.ceil(target / (duration / 16));
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(start);
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isInView, target]);
+    if (isInView) {
+      spring.set(value);
+    }
+  }, [isInView, spring, value]);
 
-  return <>{count}{suffix}</>;
+  useEffect(() => {
+    const unsubscribe = display.on("change", (v: number) => {
+      if (ref.current) {
+        ref.current.textContent = String(v);
+      }
+    });
+    return unsubscribe;
+  }, [display]);
+
+  return <span ref={ref}>0</span>;
 };
 
 const SocialProof = () => {
@@ -47,11 +51,12 @@ const SocialProof = () => {
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.2 }}
               className="text-center px-8"
             >
               <span className="font-display text-5xl md:text-6xl font-bold text-gradient-gold">
-                <CountUp target={stat.number} suffix={stat.suffix} isInView={isInView} />
+                <AnimatedNumber value={stat.number} isInView={isInView} />
+                {stat.suffix}
               </span>
               <p className="font-body text-muted-foreground text-sm tracking-widest uppercase mt-3">
                 {stat.label}
