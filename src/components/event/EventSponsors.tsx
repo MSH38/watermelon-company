@@ -1,51 +1,57 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { Sponsor } from "@/data/events";
-import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
-  const [centralIndex, setCentralIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "center",
-    slidesToScroll: 1,
-    watchFocus: false,
-    duration: 40,
-  });
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [middleIdx, setMiddleIdx] = useState(2);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const positionRef = useRef(0);
 
-  const updateCentral = useCallback(() => {
-    if (!emblaApi) return;
-    setCentralIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+  const speed = 0.5;
+
+  const getMiddleIndex = useCallback(() => {
+    if (!scrollRef.current || !sponsors.length) return 2;
+    const singleSetWidth = scrollRef.current.scrollWidth / 4;
+    const itemWidth = singleSetWidth / sponsors.length;
+    const visibleCenter = positionRef.current + (typeof window !== "undefined" ? window.innerWidth / 2 : 600);
+    return Math.floor((visibleCenter / itemWidth) % sponsors.length);
+  }, [sponsors.length]);
+
+  const animate = useCallback(() => {
+    if (!scrollRef.current || isPaused) {
+      animationRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
+    positionRef.current += speed;
+    const singleSetWidth = scrollRef.current.scrollWidth / 4;
+    if (positionRef.current >= singleSetWidth) {
+      positionRef.current -= singleSetWidth;
+    }
+
+    scrollRef.current.style.transform = `translateX(-${positionRef.current}px)`;
+    animationRef.current = requestAnimationFrame(animate);
+  }, [isPaused]);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    const start = () => {
-      autoplayRef.current = setInterval(() => {
-        if (!isHovered) emblaApi.scrollNext();
-      }, 3000);
-    };
-    start();
+    animationRef.current = requestAnimationFrame(animate);
     return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [emblaApi, isHovered]);
+  }, [animate]);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    emblaApi.on("select", updateCentral);
-    updateCentral();
-    return () => {
-      emblaApi.off("select", updateCentral);
-    };
-  }, [emblaApi, updateCentral]);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+    const interval = setInterval(() => {
+      setMiddleIdx(getMiddleIndex());
+    }, 100);
+    return () => clearInterval(interval);
+  }, [getMiddleIndex]);
 
   if (!sponsors || sponsors.length === 0) return null;
+
+  const duplicated = [...sponsors, ...sponsors, ...sponsors, ...sponsors];
 
   return (
     <section className="section-padding bg-card/50">
@@ -54,59 +60,60 @@ const EventSponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
         <h2 className="font-display text-3xl md:text-4xl font-bold mb-10">Sponsors</h2>
 
         <div
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className="overflow-hidden relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => {
+            setIsPaused(false);
+            setHoveredIndex(null);
+          }}
         >
-          <div ref={emblaRef} className="overflow-hidden">
-            <div className="flex -ml-4">
-              {sponsors.map((sponsor, i) => {
-                const isCenter = i === centralIndex;
-                return (
-                  <div
-                    key={sponsor.name + i}
-                    className="min-w-0 shrink-0 grow-0 basis-1/3 md:basis-1/5 pl-4 transition-all duration-700"
-                  >
-                    <a href={sponsor.url} target="_blank" rel="noreferrer" className="block">
-                      <div className="relative aspect-[16/9] rounded-lg overflow-hidden border border-border/50 group">
-                        <img
-                          src={sponsor.image}
-                          alt={sponsor.name}
-                          className={`w-full h-full object-contain bg-white p-2 transition-all duration-700 ${
-                            isCenter ? "" : "grayscale opacity-50"
-                          }`}
-                        />
-                        <div
-                          className={`absolute inset-0 transition-opacity duration-500 flex items-end justify-center pb-2 ${
-                            isCenter
-                              ? "bg-primary/10 opacity-100"
-                              : "bg-background/60 opacity-0 group-hover:opacity-100"
-                          }`}
-                        >
-                          <span className="font-display text-xs font-semibold text-foreground drop-shadow-md bg-background/70 px-2 py-1 rounded">
-                            {sponsor.name}
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-card/80 to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-card/80 to-transparent pointer-events-none" />
 
-          <button
-            onClick={scrollPrev}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all bg-background/80 backdrop-blur-sm"
+          <div
+            ref={scrollRef}
+            className="flex items-center gap-6 w-max will-change-transform"
           >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={scrollNext}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all bg-background/80 backdrop-blur-sm"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+            {duplicated.map((sponsor, i) => {
+              const originalIdx = i % sponsors.length;
+              const isMiddle = originalIdx === middleIdx;
+              const isHovered = hoveredIndex === i;
+              const isColored = isMiddle || isHovered;
+
+              return (
+                <a
+                  key={`${sponsor.name}-${i}`}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-shrink-0"
+                  style={{ width: "180px" }}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="relative aspect-[16/9] rounded-lg overflow-hidden border border-border/50 bg-white/5 backdrop-blur-sm">
+                    <img
+                      src={sponsor.image}
+                      alt={sponsor.name}
+                      className={`w-full h-full object-contain p-3 transition-all duration-500 ${
+                        isColored ? "grayscale-0 opacity-100" : "grayscale opacity-40"
+                      }`}
+                      loading="lazy"
+                    />
+                    <div
+                      className={`absolute inset-0 flex items-end justify-center pb-2 transition-opacity duration-300 ${
+                        isColored ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <span className="font-display text-xs font-semibold text-foreground bg-background/70 px-2 py-1 rounded">
+                        {sponsor.name}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
