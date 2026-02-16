@@ -5,7 +5,7 @@ import eventGallery1 from "@/assets/event-gallery-1.jpg";
 import eventGallery2 from "@/assets/event-gallery-2.jpg";
 
 // Team member photos
-import team1 from "@/assets/team-4.jpg";
+import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
@@ -108,23 +108,23 @@ export const events: EventData[] = [
       "The premier technology conference bringing together 5,000+ industry leaders, innovators, and visionaries. Featuring keynote sessions, hands-on workshops, and an exhibition floor showcasing cutting-edge solutions.",
     heroImage: caseStudy1,
     gallery: [eventGallery1, eventGallery2, caseStudy1],
-    videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
+    videoUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     isLive: true,
-    liveStreamUrl: "https://youtu.be/Cjbt1qdso2M",
+    liveStreamUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     brochureUrl: "#",
     result: "5,000+ attendees, 98% satisfaction rate",
     speakers: [
-      { name: "James Anderson", role: "Keynote Speaker", bio: "CEO of TechVision Inc. with 20+ years in AI and machine learning.", image: team1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/", twitter: "https://twitter.com" },
-      { name: "Sarah Mitchell", role: "Panel Speaker", bio: "VP of Innovation at Global Systems. Expert in digital transformation.", image: team2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "David Chen", role: "Workshop Lead", bio: "CTO at CloudScale. Pioneer in cloud-native architecture.", image: team3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/", twitter: "https://twitter.com" },
-      { name: "Fatima Al-Rashid", role: "AI & Ethics Speaker", bio: "Director of AI Ethics at FutureMinds. Advocate for responsible AI.", image: team4, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Michael Torres", role: "DevOps Speaker", bio: "VP Engineering at ScaleOps. Expert in CI/CD and infrastructure.", image: team5, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/", twitter: "https://twitter.com" },
-      { name: "Aisha Karim", role: "Data Science Lead", bio: "Head of Data Science at Analytix. Specializing in predictive models.", image: team6, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "James Anderson", role: "Keynote Speaker", bio: "CEO of TechVision Inc. with 20+ years in AI and machine learning.", image: team1, linkedin: "https://linkedin.com", twitter: "https://twitter.com" },
+      { name: "Sarah Mitchell", role: "Panel Speaker", bio: "VP of Innovation at Global Systems. Expert in digital transformation.", image: team2, linkedin: "https://linkedin.com" },
+      { name: "David Chen", role: "Workshop Lead", bio: "CTO at CloudScale. Pioneer in cloud-native architecture.", image: team3, linkedin: "https://linkedin.com", twitter: "https://twitter.com" },
+      { name: "Fatima Al-Rashid", role: "AI & Ethics Speaker", bio: "Director of AI Ethics at FutureMinds. Advocate for responsible AI.", image: team4, linkedin: "https://linkedin.com" },
+      { name: "Michael Torres", role: "DevOps Speaker", bio: "VP Engineering at ScaleOps. Expert in CI/CD and infrastructure.", image: team5, linkedin: "https://linkedin.com", twitter: "https://twitter.com" },
+      { name: "Aisha Karim", role: "Data Science Lead", bio: "Head of Data Science at Analytix. Specializing in predictive models.", image: team6, linkedin: "https://linkedin.com" },
     ],
     chairpersons: [
-      { name: "Dr. Hassan Al-Farooq", role: "Conference Chair", bio: "Chairman of the UAE Technology Council. Leading the conference program.", image: speakerChair1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Prof. Richard Müller", role: "Academic Chair", bio: "Dean of Computer Science at ETH Zurich. Renowned AI researcher.", image: speakerChair2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Elena Voronova", role: "Industry Chair", bio: "CEO of NovaTech Group. 25+ years in enterprise technology.", image: speakerChair3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Dr. Hassan Al-Farooq", role: "Conference Chair", bio: "Chairman of the UAE Technology Council. Leading the conference program.", image: speakerChair1, linkedin: "https://linkedin.com" },
+      { name: "Prof. Richard Müller", role: "Academic Chair", bio: "Dean of Computer Science at ETH Zurich. Renowned AI researcher.", image: speakerChair2, linkedin: "https://linkedin.com" },
+      { name: "Elena Voronova", role: "Industry Chair", bio: "CEO of NovaTech Group. 25+ years in enterprise technology.", image: speakerChair3, linkedin: "https://linkedin.com" },
     ],
     schedule: [
       {
@@ -179,20 +179,20 @@ export const events: EventData[] = [
       "A world-class trade exhibition featuring 200+ exhibitors from 40+ countries. Connecting global businesses with regional markets through curated matchmaking sessions and live product showcases.",
     heroImage: caseStudy2,
     gallery: [eventGallery2, eventGallery1, caseStudy2],
-    videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
+    videoUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     isLive: false,
     brochureUrl: "#",
     result: "200+ exhibitors, $2M+ deals closed",
     speakers: [
-      { name: "Sarah Mitchell", role: "Opening Speaker", bio: "VP of Innovation at Global Systems. Expert in international trade.", image: team2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "David Chen", role: "Tech Pavilion Lead", bio: "CTO at CloudScale. Showcasing next-gen trade technologies.", image: team3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Rania El-Sayed", role: "Trade Policy Expert", bio: "Senior Advisor at World Trade Organization.", image: team4, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Marcus Wright", role: "Logistics Speaker", bio: "COO of GlobalFreight. Supply chain optimization expert.", image: team5, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Sarah Mitchell", role: "Opening Speaker", bio: "VP of Innovation at Global Systems. Expert in international trade.", image: team2, linkedin: "https://linkedin.com" },
+      { name: "David Chen", role: "Tech Pavilion Lead", bio: "CTO at CloudScale. Showcasing next-gen trade technologies.", image: team3, linkedin: "https://linkedin.com" },
+      { name: "Rania El-Sayed", role: "Trade Policy Expert", bio: "Senior Advisor at World Trade Organization.", image: team4, linkedin: "https://linkedin.com" },
+      { name: "Marcus Wright", role: "Logistics Speaker", bio: "COO of GlobalFreight. Supply chain optimization expert.", image: team5, linkedin: "https://linkedin.com" },
     ],
     chairpersons: [
-      { name: "Dr. Hassan Al-Farooq", role: "Expo Director", bio: "Chairman of the UAE Technology Council. Overseeing exhibition operations.", image: speakerChair1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Prof. Richard Müller", role: "Trade Forum Chair", bio: "Dean of Economics at ETH Zurich.", image: speakerChair2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Elena Voronova", role: "Innovation Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Dr. Hassan Al-Farooq", role: "Expo Director", bio: "Chairman of the UAE Technology Council. Overseeing exhibition operations.", image: speakerChair1, linkedin: "https://linkedin.com" },
+      { name: "Prof. Richard Müller", role: "Trade Forum Chair", bio: "Dean of Economics at ETH Zurich.", image: speakerChair2, linkedin: "https://linkedin.com" },
+      { name: "Elena Voronova", role: "Innovation Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://linkedin.com" },
     ],
     schedule: [
       {
@@ -229,7 +229,7 @@ export const events: EventData[] = [
       "A spectacular national celebration featuring live performances, fireworks, cultural exhibitions, and a live broadcast reaching 10M+ viewers worldwide.",
     heroImage: caseStudy3,
     gallery: [eventGallery1, caseStudy3, eventGallery2],
-    videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
+    videoUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     isLive: false,
     brochureUrl: "#",
     result: "50,000+ guests, live broadcast to 10M+",
@@ -271,20 +271,20 @@ export const events: EventData[] = [
     description: "A leading forum connecting healthcare professionals with next-gen medical technologies and research breakthroughs.",
     heroImage: eventGallery1,
     gallery: [eventGallery1, eventGallery2, caseStudy1],
-    videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
+    videoUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     isLive: false,
     brochureUrl: "#",
     result: "3,000+ healthcare professionals attended",
     speakers: [
-      { name: "Dr. Amina Al-Farsi", role: "Keynote Speaker", bio: "Chief Medical Officer at MedTech Global.", image: team4, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "James Anderson", role: "HealthTech Lead", bio: "CEO of TechVision Inc. Digital health solutions.", image: team1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Sarah Mitchell", role: "Panel Moderator", bio: "VP of Innovation. Healthcare transformation expert.", image: team2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "David Chen", role: "Tech Workshop Lead", bio: "CTO at CloudScale. Health data architecture.", image: team3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Dr. Amina Al-Farsi", role: "Keynote Speaker", bio: "Chief Medical Officer at MedTech Global.", image: team4, linkedin: "https://linkedin.com" },
+      { name: "James Anderson", role: "HealthTech Lead", bio: "CEO of TechVision Inc. Digital health solutions.", image: team1, linkedin: "https://linkedin.com" },
+      { name: "Sarah Mitchell", role: "Panel Moderator", bio: "VP of Innovation. Healthcare transformation expert.", image: team2, linkedin: "https://linkedin.com" },
+      { name: "David Chen", role: "Tech Workshop Lead", bio: "CTO at CloudScale. Health data architecture.", image: team3, linkedin: "https://linkedin.com" },
     ],
     chairpersons: [
-      { name: "Dr. Hassan Al-Farooq", role: "Forum Chair", bio: "Leading the healthcare forum.", image: speakerChair1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Elena Voronova", role: "Innovation Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Prof. Richard Müller", role: "Research Chair", bio: "Dean of Medical Sciences.", image: speakerChair2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Dr. Hassan Al-Farooq", role: "Forum Chair", bio: "Leading the healthcare forum.", image: speakerChair1, linkedin: "https://linkedin.com" },
+      { name: "Elena Voronova", role: "Innovation Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://linkedin.com" },
+      { name: "Prof. Richard Müller", role: "Research Chair", bio: "Dean of Medical Sciences.", image: speakerChair2, linkedin: "https://linkedin.com" },
     ],
     schedule: [
       { label: "Day 1", items: [{ time: "09:00", title: "Opening & Registration" }, { time: "10:30", title: "Keynote: Future of Telemedicine", speaker: "Dr. Amina Al-Farsi" }] },
@@ -303,21 +303,21 @@ export const events: EventData[] = [
     description: "Bringing together CFOs, banking executives, and fintech startups to explore the future of digital finance in the Middle East.",
     heroImage: eventGallery2,
     gallery: [eventGallery2, caseStudy2, caseStudy3],
-    videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
+    videoUrl: "https://www.youtube.com/embed/QTPSSerVZsc",
     isLive: false,
     brochureUrl: "#",
     result: "1,500+ finance leaders, 50+ startups showcased",
     speakers: [
-      { name: "David Chen", role: "Panel Moderator", bio: "CTO at CloudScale. Fintech innovation expert.", image: team3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Sarah Mitchell", role: "Keynote Speaker", bio: "VP of Innovation. Digital banking expert.", image: team2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Michael Torres", role: "Blockchain Speaker", bio: "VP Engineering at ScaleOps. DeFi specialist.", image: team5, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Aisha Karim", role: "RegTech Lead", bio: "Head of Data Science. Compliance analytics.", image: team6, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Tariq Bashir", role: "PayTech Speaker", bio: "Technical Director. Payment systems expert.", image: team7, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "David Chen", role: "Panel Moderator", bio: "CTO at CloudScale. Fintech innovation expert.", image: team3, linkedin: "https://linkedin.com" },
+      { name: "Sarah Mitchell", role: "Keynote Speaker", bio: "VP of Innovation. Digital banking expert.", image: team2, linkedin: "https://linkedin.com" },
+      { name: "Michael Torres", role: "Blockchain Speaker", bio: "VP Engineering at ScaleOps. DeFi specialist.", image: team5, linkedin: "https://linkedin.com" },
+      { name: "Aisha Karim", role: "RegTech Lead", bio: "Head of Data Science. Compliance analytics.", image: team6, linkedin: "https://linkedin.com" },
+      { name: "Tariq Bashir", role: "PayTech Speaker", bio: "Technical Director. Payment systems expert.", image: team7, linkedin: "https://linkedin.com" },
     ],
     chairpersons: [
-      { name: "Dr. Hassan Al-Farooq", role: "Summit Chair", bio: "Chairman of the UAE Technology Council.", image: speakerChair1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Prof. Richard Müller", role: "Academic Chair", bio: "Dean of Economics at ETH Zurich.", image: speakerChair2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
-      { name: "Elena Voronova", role: "Industry Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
+      { name: "Dr. Hassan Al-Farooq", role: "Summit Chair", bio: "Chairman of the UAE Technology Council.", image: speakerChair1, linkedin: "https://linkedin.com" },
+      { name: "Prof. Richard Müller", role: "Academic Chair", bio: "Dean of Economics at ETH Zurich.", image: speakerChair2, linkedin: "https://linkedin.com" },
+      { name: "Elena Voronova", role: "Industry Chair", bio: "CEO of NovaTech Group.", image: speakerChair3, linkedin: "https://linkedin.com" },
     ],
     schedule: [
       { label: "Day 1", items: [{ time: "09:00", title: "Opening Keynote" }, { time: "11:00", title: "Panel: Digital Banking in MENA" }] },
