@@ -274,7 +274,7 @@ export const events: EventData[] = [
     videoUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
     isLive: false,
     brochureUrl: "#",
-    result: "3,000+ healthcare professionals attended",
+    result: "1,000+ healthcare professionals attended",
     speakers: [
       { name: "Dr. Amina Al-Farsi", role: "Keynote Speaker", bio: "Chief Medical Officer at MedTech Global.", image: team4, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
       { name: "James Anderson", role: "HealthTech Lead", bio: "CEO of TechVision Inc. Digital health solutions.", image: team1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
