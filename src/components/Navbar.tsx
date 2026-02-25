@@ -50,6 +50,7 @@ const Navbar = () => {
     }
     setIsMobileOpen(false);
   };
+  
 
   return (
     <motion.header

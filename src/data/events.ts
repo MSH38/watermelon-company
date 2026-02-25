@@ -112,7 +112,7 @@ export const events: EventData[] = [
     isLive: true,
     liveStreamUrl: "https://www.youtube.com/embed/Cjbt1qdso2M",
     brochureUrl: "#",
-    result: "5,000+ attendees, 98% satisfaction rate",
+    result: "5,000+ attendees, 87% satisfaction rate",
     speakers: [
       { name: "James Anderson", role: "Keynote Speaker", bio: "CEO of TechVision Inc. with 20+ years in AI and machine learning.", image: team1, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/", twitter: "https://twitter.com" },
       { name: "Sarah Mitchell", role: "Panel Speaker", bio: "VP of Innovation at Global Systems. Expert in digital transformation.", image: team2, linkedin: "https://www.linkedin.com/in/mahmoud-heikal/" },
